@@ -1,4 +1,4 @@
-package com.cs.blog.web.admin;
+package com.cs.blog.controller.admin;
 
 import com.cs.blog.po.Type;
 import com.cs.blog.service.TypeService;

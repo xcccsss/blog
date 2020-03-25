@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{:: title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>关于我</title>
@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--导航-->
-<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+<nav th:replace="_fragments :: menu(5)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">Blog</h2>
@@ -61,22 +61,30 @@
                     <div class="ui teal basic label m-margin-tb-tiny">Html</div>
                 </div>
                 <div class="ui bottom attached segment">
-                    <a href="#" class="ui circular icon button"><i class="github icon"></i></a>
+                    <a href="https://github.com/xcccsss" class="ui circular icon button" target="_blank"><i class="github icon"></i></a>
                     <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
                     <a href="#" class="ui qq circular icon button" data-content="2956894101"
                        data-position="bottom center"><i class="qq icon"></i></a>
                 </div>
                 <div class="ui wechat-qr flowing popup transition hidden">
-                    <img src="../static/images/weChat.jpg" class="ui rounded image" style="width: 110px">
+                    <img th:src="@{/images/weChat.jpg}" src="../static/images/weChat.jpg" class="ui rounded image" style="width: 110px">
                 </div>
             </div>
         </div>
     </div>
 </div>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <!--底部footer-->
-<footer class="ui inverted vertical segment m-padded-tb-massive">
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
     <div class="ui center aligned container">
         <div class="ui inverted divided stackable grid">
             <div class="three wide column">

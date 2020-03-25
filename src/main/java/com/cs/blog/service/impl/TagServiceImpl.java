@@ -1,14 +1,23 @@
-package com.cs.blog.service;
+package com.cs.blog.service.impl;
 
 import com.cs.blog.dao.TagRepository;
 import com.cs.blog.exception.NotFoundException;
 import com.cs.blog.po.Tag;
+import com.cs.blog.service.TagService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -38,6 +47,41 @@ public class TagServiceImpl implements TagService {
     @Override
     public Page<Tag> listTag(Pageable pageable) {
         return tagRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Tag> listTag() {
+        return tagRepository.findAll();
+    }
+
+    @Override
+    public List<Tag> listTag(String ids) {
+        List<Optional<Tag>> tags = new ArrayList<>();
+        List<Long> list = convertToList(ids);
+        for (Long a : list) {
+            tags.add(tagRepository.findById(a));
+        }
+        return tags.stream()
+                .flatMap(o -> o.isPresent() ? Stream.of(o.get()) : Stream.empty())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Tag> listTagTop(Integer size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "blogs.size");
+        Pageable pageable = PageRequest.of(0, size, sort);
+        return tagRepository.findTop(pageable);
+    }
+
+    private List<Long> convertToList(String ids) {
+        List<Long> list = new ArrayList<>();
+        if (!"".equals(ids) && ids != null) {
+            String[] idArray = ids.split(",");
+            for (int i = 0; i < idArray.length; i++) {
+                list.add(new Long(idArray[i]));
+            }
+        }
+        return list;
     }
 
     @Transactional

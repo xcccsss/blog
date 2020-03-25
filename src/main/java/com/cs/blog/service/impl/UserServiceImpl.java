@@ -1,7 +1,8 @@
-package com.cs.blog.service;
+package com.cs.blog.service.impl;
 
 import com.cs.blog.dao.UserRepository;
 import com.cs.blog.po.User;
+import com.cs.blog.service.UserService;
 import com.cs.blog.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.cs.blog.web.admin;
+package com.cs.blog.controller.admin;
 
 import com.cs.blog.po.Tag;
 import com.cs.blog.service.TagService;
